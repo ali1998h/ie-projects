@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html dir="rtl">
+  <head>
+    <meta charset="utf-8">
+    <title>ماشین حساب</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      alert("ماشین حساب");
+      let operator = prompt("عملگر را وارد کنید","+");
+      let x = prompt("مقدار اول");
+      let y = prompt("مقدار دوم");
+      x = Number(x);
+      y = Number(y);
+      if(operator == "+"){
+        alert(x+y);
+      }
+      else if(operator == "*"){
+        alert(x*y);
+      }
+      else if(operator == "-"){
+        alert(x-y);
+      }
+      else if(operator == "/"){
+        alert(x/y);
+      }
+    </script>
+  </body>
+</html>
