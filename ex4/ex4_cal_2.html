@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ماشین حساب</title>
+    <style>
+      html {background-color: #b3d9ff;}
+      .grid-container {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        padding: 40px;
+        border-radius: 20px;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        height: 25%;
+        width: 25%;
+      }
+      .grid-item {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        padding: 10px;
+        font-size: 30px;
+        text-align: center;
+        border-radius: 20px;
+        border-color: blue;
+      }
+      .zero {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        padding: 10px;
+        font-size: 30px;
+        text-align: center;
+        border-radius: 20px;
+        border-color: blue;
+        grid-column-start: 1;
+        grid-column-end: 4;
+      }
+      .result {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        padding: 10px;
+        font-size: 30px;
+        text-align: center;
+        grid-column-start: 1;
+        grid-column-end: 5;
+        border-radius: 20px;
+        border-color: blue;
+      }
+      .display{
+        grid-column-start: 1;
+        grid-column-end: 5;
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        padding: 10px;
+        font-size: 30px;
+        text-align: center;
+        border-radius: 20px;
+        border-color: blue;
+      }
+    </style>
+  </head>
+  <body>
+
+    <script>
+
+      function resultshow(){
+        let disp = document.getElementsByClassName("display")[0];
+        let inputs = disp.innerHTML;
+        calculate(inputs);
+      }
+
+      var a;
+      var index = 0;
+      var cur;
+
+      function calculate(inputs){
+        a = inputs;
+        cur = a[index];
+        let result = E();
+        let disp = document.getElementsByClassName("display")[0];
+        disp.innerHTML = result;
+      }
+
+      function E(){
+        let x = T();
+        while(cur == "+" || cur == "-"){
+          let op = cur;
+          index = index + 1;
+          cur = a[index];
+          if(op == "+"){
+            x = x + T();
+          }
+          else if(op == "-"){
+            x = x - T();
+          }
+        }
+        return x;
+      }
+
+      function T(){
+        let x = F();
+        while(cur == "*" || cur == "/"){
+          let op = cur;
+          index = index + 1;
+          cur = a[index];
+          if(op == "*"){
+            x = x * F();
+          }
+          else if(op == "/"){
+            x = x / F();
+          }
+        }
+        return x;
+      }
+
+      function F(){
+        let x = Number(cur);
+        index = index + 1;
+        while(a[index] == "0" || a[index] == "1" || a[index] == "2" || a[index] == "3" || a[index] == "4" || a[index] == "5" || a[index] == "6" || a[index] == "7" || a[index] == "8" || a[index] == "9"){
+          x = x * 10;
+          x = x + Number(a[index]);
+          index = index + 1;
+        }
+        cur = a[index];
+        return x;
+      }
+
+      function showItem(inputID){
+        let disp = document.getElementsByClassName("display")[0];
+        if(disp.innerHTML == "display result" || disp.innerHTML == "0"){
+          disp.innerHTML = "";
+        }
+        let input = inputID.innerHTML;
+        disp.innerHTML = disp.innerHTML + input;
+      }
+      function mDown(id){
+        id.style.backgroundColor = "#00bfff";
+      }
+
+      function mUp(id){
+        id.style.backgroundColor = "#ffffff";
+      }
+    </script>
+    <div class="grid-container">
+      <div class="display">display result</div>
+      <div class="grid-item" onclick="showItem(this)" onmousedown="mDown(this)" onmouseup="mUp(this)">1</div>
+      <div class="grid-item" onclick="showItem(this)" onmousedown="mDown(this)" onmouseup="mUp(this)">2</div>
+      <div class="grid-item" onclick="showItem(this)" onmousedown="mDown(this)" onmouseup="mUp(this)">3</div>
+      <div class="grid-item" onclick="showItem(this)" onmousedown="mDown(this)" onmouseup="mUp(this)">+</div>
+      <div class="grid-item" onclick="showItem(this)" onmousedown="mDown(this)" onmouseup="mUp(this)">4</div>
+      <div class="grid-item" onclick="showItem(this)" onmousedown="mDown(this)" onmouseup="mUp(this)">5</div>
+      <div class="grid-item" onclick="showItem(this)" onmousedown="mDown(this)" onmouseup="mUp(this)">6</div>
+      <div class="grid-item" onclick="showItem(this)" onmousedown="mDown(this)" onmouseup="mUp(this)">-</div>
+      <div class="grid-item" onclick="showItem(this)" onmousedown="mDown(this)" onmouseup="mUp(this)">7</div>
+      <div class="grid-item" onclick="showItem(this)" onmousedown="mDown(this)" onmouseup="mUp(this)">8</div>
+      <div class="grid-item" onclick="showItem(this)" onmousedown="mDown(this)" onmouseup="mUp(this)">9</div>
+      <div class="grid-item" onclick="showItem(this)" onmousedown="mDown(this)" onmouseup="mUp(this)">*</div>
+      <div class="zero" onclick="showItem(this)" onmousedown="mDown(this)" onmouseup="mUp(this)">0</div>
+      <div class="grid-item" onclick="showItem(this)" onmousedown="mDown(this)" onmouseup="mUp(this)">/</div>
+      <div class="result" onclick="resultshow()" onmousedown="mDown(this)" onmouseup="mUp(this)">=</div>
+    </div>
+  </body>
+</html>
