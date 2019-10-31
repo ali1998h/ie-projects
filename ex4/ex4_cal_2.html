@@ -114,6 +114,12 @@
       }
 
       function F(){
+        let sign = 1;
+        if(cur == "-"){
+          sign = -1;
+          index = index + 1;
+          cur = a[index];
+        }
         let x = Number(cur);
         index = index + 1;
         while(a[index] == "0" || a[index] == "1" || a[index] == "2" || a[index] == "3" || a[index] == "4" || a[index] == "5" || a[index] == "6" || a[index] == "7" || a[index] == "8" || a[index] == "9"){
@@ -121,6 +127,7 @@
           x = x + Number(a[index]);
           index = index + 1;
         }
+        x = x * sign;
         cur = a[index];
         return x;
       }
